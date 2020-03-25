@@ -168,6 +168,9 @@ export default class Login extends Component {
           {this.state.error.length !== 0 && (
             <Text style={Styles.ErrorMessageLogin}>{this.state.error}</Text>
           )}
+          {this.state.success.length !== 0 && (
+            <Text style={Styles.ErrorMessageLogin}>{this.success.error}</Text>
+          )}
         </Animated.View>
       </KeyboardAvoidingView>
     );
