@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import Login from './components/login';
+import React from 'react';
+import Routes from './route';
 
-export default class Main extends Component {
-  render() {
-    return <Login />;
-  }
-}
+const App = () => {
+  return <Routes />;
+};
+
+export default App;
