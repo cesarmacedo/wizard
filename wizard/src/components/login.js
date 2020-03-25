@@ -12,7 +12,7 @@ import {
   Keyboard,
 } from 'react-native';
 
-const logoImage = require('../images/logo4.png');
+const logoImage = require('../images/logo.png');
 
 export default class Login extends Component {
   constructor(props) {
@@ -91,7 +91,7 @@ export default class Login extends Component {
     ]).start();
   };
 
-  handleSignUpPress = async () => {
+  handleSignInPress = async () => {
     Keyboard.dismiss();
     if (this.state.sername === 0 || this.state.password.length === 0) {
       this.setState(
@@ -132,7 +132,7 @@ export default class Login extends Component {
         <Animated.View style={[Styles.containerForm]}>
           <TextInput
             style={Styles.inputLogin}
-            placeholder="Login"
+            placeholder="E-mail"
             autoCorrect={false}
             value={this.state.username}
             onChangeText={this.handleUsernameChange}
@@ -148,7 +148,7 @@ export default class Login extends Component {
             onFocus={() => this.setState({error: ''})}
           />
           <TouchableOpacity
-            onPress={this.handleSignUpPress}
+            onPress={this.handleSignInPress}
             style={Styles.btnSubmitLogin}>
             <Text style={Styles.textSubmitLogin}>Acessar</Text>
           </TouchableOpacity>

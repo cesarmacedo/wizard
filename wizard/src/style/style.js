@@ -79,4 +79,28 @@ export default StyleSheet.create({
     borderColor: '#ce2029',
     borderWidth: 1,
   },
+
+  containerSignUp: {
+    flex: 1,
+  },
+
+  imageSignUp: {
+    width: 300,
+    height: 120,
+  },
+
+  containerLogoSignUp: {
+    marginBottom: 50,
+  },
+
+  inputSignUp: {
+    backgroundColor: '#FFF',
+    width: '90%',
+    marginBottom: 10,
+    color: '#222',
+    fontSize: 17,
+    borderRadius: 7,
+    padding: 10,
+  },
+
 });
