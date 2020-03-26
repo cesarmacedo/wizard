@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Styles from '../style/style';
 import api from '../services/api';
 import {Actions} from 'react-native-router-flux';
+import I18n from '../services/i18n';
 import {
   TouchableOpacity,
   Text,
@@ -92,10 +93,7 @@ export default class Login extends Component {
   handleSignInPress = async () => {
     Keyboard.dismiss();
     if (this.state.sername === 0 || this.state.password.length === 0) {
-      this.setState(
-        {error: 'Preencha todos os campos para continuar!'},
-        () => false,
-      );
+      this.setState({error: I18n.t('mandatoryFields')}, () => false);
     } else {
       try {
         const response = await api.post('', {
@@ -103,7 +101,6 @@ export default class Login extends Component {
           password: this.state.password,
         });
       } catch (_err) {
-        console.log(_err.toString());
         this.setState({
           error: _err.toString(),
         });
@@ -130,7 +127,7 @@ export default class Login extends Component {
         <Animated.View style={[Styles.containerForm]}>
           <TextInput
             style={Styles.inputLogin}
-            placeholder="E-mail"
+            placeholder={I18n.t('email')}
             autoCorrect={false}
             value={this.state.username}
             onChangeText={this.handleUsernameChange}
@@ -138,7 +135,7 @@ export default class Login extends Component {
           />
           <TextInput
             style={Styles.inputLogin}
-            placeholder="Senha"
+            placeholder={I18n.t('password')}
             autoCorrect={false}
             value={this.state.password}
             onChangeText={this.handlePasswordChange}
@@ -148,14 +145,14 @@ export default class Login extends Component {
           <TouchableOpacity
             onPress={this.handleSignInPress}
             style={Styles.btnSubmitLogin}>
-            <Text style={Styles.textSubmitLogin}>Acessar</Text>
+            <Text style={Styles.textSubmitLogin}>{I18n.t('SignIn')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               Actions.SignUp();
             }}
             style={Styles.btnRegisterLogin}>
-            <Text style={Styles.textRegisterLogin}>Criar Conta</Text>
+            <Text style={Styles.textRegisterLogin}>{I18n.t('SignUp')}</Text>
           </TouchableOpacity>
           {this.state.error.length !== 0 && (
             <Text style={Styles.ErrorMessageLogin}>{this.state.error}</Text>
