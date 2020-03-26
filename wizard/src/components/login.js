@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Styles from '../style/style';
 import api from '../services/api';
 import {Actions} from 'react-native-router-flux';
@@ -56,13 +56,11 @@ export default class Login extends Component {
   }
 
   handleUsernameChange = username => {
-    this.setState({error: ''});
-    this.setState({username});
+    this.setState({error: '', username: username});
   };
 
   handlePasswordChange = password => {
-    this.setState({error: ''});
-    this.setState({password});
+    this.setState({error: '', password: password});
   };
 
   _keyboardDidShow = () => {
