@@ -56,14 +56,6 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  SuccessMessageLogin: {
-    textAlign: 'center',
-    color: '#08a092',
-    fontSize: 16,
-    marginBottom: 15,
-    marginHorizontal: 20,
-  },
-
   ErrorMessageLogin: {
     textAlign: 'center',
     justifyContent: 'center',
@@ -77,6 +69,38 @@ export default StyleSheet.create({
     paddingBottom: 10,
     borderRadius: 7,
     borderColor: '#ce2029',
+    borderWidth: 1,
+  },
+
+  ErrorMessageSignIn: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    color: '#ce2029',
+    backgroundColor: '#FFF',
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 15,
+    width: '90%',
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 7,
+    borderColor: '#ce2029',
+    borderWidth: 1,
+  },
+
+  SuccessMessageSignIn: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    color: '#008000',
+    backgroundColor: '#FFF',
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 15,
+    width: '90%',
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 7,
+    borderColor: '#008000',
     borderWidth: 1,
   },
 

@@ -3,6 +3,7 @@
     "email": "E-mail",
     "mandatoryFields": "Preencha todos os campos!",
     "SignIn": "Acessar",
-    "SignUp": "Criar Conta"
+    "SignUp": "Criar Conta",
+    "SucessSignUp": "Usuário cadastrado com sucesso!"
 
 }

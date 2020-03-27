@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Styles from '../style/style';
 import api from '../services/api';
 import {Actions} from 'react-native-router-flux';
+import I18n from '../services/i18n';
 import {
   TouchableOpacity,
   Text,
@@ -13,6 +14,7 @@ import {
 } from 'react-native';
 
 const logoImage = require('../images/logo.png');
+const delay = 3000;
 
 export default class Login extends Component {
   constructor(props) {
@@ -56,9 +58,14 @@ export default class Login extends Component {
     this.keyboardDidHideListener.remove();
   }
 
-  handleUsernameChange = username => {
+  handleEmailChange = email => {
     this.setState({error: ''});
-    this.setState({username});
+    this.setState({email});
+  };
+
+  handleNicknameChange = nickName => {
+    this.setState({error: ''});
+    this.setState({nickName});
   };
 
   handlePasswordChange = password => {
@@ -99,16 +106,17 @@ export default class Login extends Component {
       this.state.password.length === 0 ||
       this.state.email.length === 0
     ) {
-      this.setState(
-        {error: 'Preencha todos os campos para se cadastrar!'},
-        () => false,
-      );
+      this.setState({error: I18n.t('mandatoryFields')}, () => false);
     } else {
       try {
-        const response = await api.post('', {
-          username: this.state.username,
-          password: this.state.password,
-        });
+        // const response = await api.post('', {
+        //   username: this.state.username,
+        //   password: this.state.password,
+        // });
+        this.setState({success: I18n.t('SucessSignUp')});
+        setTimeout(() => {
+          Actions.Login();
+        }, delay);
       } catch (_err) {
         console.log(_err.toString());
         this.setState({
@@ -136,10 +144,10 @@ export default class Login extends Component {
         <Animated.View style={[Styles.containerForm]}>
           <TextInput
             style={Styles.inputSignUp}
-            placeholder="Nick name"
+            placeholder="Nick Name"
             autoCorrect={false}
             value={this.state.nickName}
-            onChangeText={this.handlePasswordChange}
+            onChangeText={this.handleNicknameChange}
             secureTextEntry
             onFocus={() => this.setState({error: ''})}
           />
@@ -148,7 +156,7 @@ export default class Login extends Component {
             placeholder="E-mail"
             autoCorrect={false}
             value={this.state.email}
-            onChangeText={this.handleUsernameChange}
+            onChangeText={this.handleEmailChange}
             onFocus={() => this.setState({error: ''})}
           />
           <TextInput
@@ -169,7 +177,9 @@ export default class Login extends Component {
             <Text style={Styles.ErrorMessageLogin}>{this.state.error}</Text>
           )}
           {this.state.success.length !== 0 && (
-            <Text style={Styles.ErrorMessageLogin}>{this.success.error}</Text>
+            <Text style={Styles.SuccessMessageSignIn}>
+              {this.state.success}
+            </Text>
           )}
         </Animated.View>
       </KeyboardAvoidingView>
