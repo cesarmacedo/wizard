@@ -109,10 +109,6 @@ export default class Login extends Component {
       this.setState({error: I18n.t('mandatoryFields')}, () => false);
     } else {
       try {
-        // const response = await api.post('', {
-        //   username: this.state.username,
-        //   password: this.state.password,
-        // });
         this.setState({success: I18n.t('SucessSignUp')});
         setTimeout(() => {
           Actions.Login();
@@ -144,7 +140,7 @@ export default class Login extends Component {
         <Animated.View style={[Styles.containerForm]}>
           <TextInput
             style={Styles.inputSignUp}
-            placeholder="Nick Name"
+            placeholder="NickName"
             autoCorrect={false}
             value={this.state.nickName}
             onChangeText={this.handleNicknameChange}
