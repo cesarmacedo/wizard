@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import Styles from '../style/style';
-import api from '../services/api';
+import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
-import I18n from '../services/i18n';
 import {
   TouchableOpacity,
   Text,
@@ -13,13 +11,16 @@ import {
   Keyboard,
 } from 'react-native';
 
+import api from '../services/api';
+import Styles from '../style/style';
+import I18n from '../services/i18n';
 const logoImage = require('../images/logo.png');
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: '',
       offset: new Animated.ValueXY({x: 0, y: 95}),
       opacity: new Animated.Value(0),
@@ -56,8 +57,8 @@ export default class Login extends Component {
     this.keyboardDidHideListener.remove();
   }
 
-  handleUsernameChange = username => {
-    this.setState({error: '', username: username});
+  handleEmailChange = email => {
+    this.setState({error: '', email});
   };
 
   handlePasswordChange = password => {
@@ -96,14 +97,29 @@ export default class Login extends Component {
       this.setState({error: I18n.t('mandatoryFields')}, () => false);
     } else {
       try {
-        const response = await api.post('', {
-          username: this.state.username,
+        const response = await api.post('/v1/login', {
+          email: this.state.email,
           password: this.state.password,
         });
-      } catch (_err) {
-        this.setState({
-          error: _err.toString(),
-        });
+        const {data} = response;
+        const {token} = data;
+
+        await AsyncStorage.setItem('@user', JSON.stringify(data));
+        await AsyncStorage.setItem('@token', JSON.stringify(token));
+
+        Actions.Home();
+      } catch (error) {
+        const {response} = error;
+        const {status} = response ? response : {};
+        if (status === 401) {
+          this.setState({
+            error: I18n.t('unauthorized'),
+          });
+        } else {
+          this.setState({
+            error: I18n.t('genericError'),
+          });
+        }
       }
     }
   };
@@ -129,8 +145,8 @@ export default class Login extends Component {
             style={Styles.inputLogin}
             placeholder={I18n.t('email')}
             autoCorrect={false}
-            value={this.state.username}
-            onChangeText={this.handleUsernameChange}
+            value={this.state.email}
+            onChangeText={this.handleEmailChange}
             onFocus={() => this.setState({error: ''})}
           />
           <TextInput
