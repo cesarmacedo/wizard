@@ -1,9 +1,12 @@
 {
     "password": "Senha",
     "email": "E-mail",
+    "nickname": "Nickname",
     "mandatoryFields": "Preencha todos os campos!",
     "SignIn": "Acessar",
     "SignUp": "Criar Conta",
-    "SucessSignUp": "Usuário cadastrado com sucesso!"
-
+    "SucessSignUp": "Usuário cadastrado com sucesso!",
+    "unauthorized": "E-mail ou senha incorretos!",
+    "genericError": "Um erro ocorreu, tente novamente mais tarde!",
+    "usedEmail": "O e-mail já encontra-se em uso!"
 }

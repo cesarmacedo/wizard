@@ -20,7 +20,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nickName: '',
+      nickname: '',
       password: '',
       email: '',
       offset: new Animated.ValueXY({x: 0, y: 95}),
@@ -63,9 +63,9 @@ export default class Login extends Component {
     this.setState({email});
   };
 
-  handleNicknameChange = nickName => {
+  handleNicknameChange = nickname => {
     this.setState({error: ''});
-    this.setState({nickName});
+    this.setState({nickname});
   };
 
   handlePasswordChange = password => {
@@ -102,22 +102,34 @@ export default class Login extends Component {
   handleSignUpPress = async () => {
     Keyboard.dismiss();
     if (
-      this.state.nickName === 0 ||
+      this.state.nickname === 0 ||
       this.state.password.length === 0 ||
       this.state.email.length === 0
     ) {
       this.setState({error: I18n.t('mandatoryFields')}, () => false);
     } else {
       try {
+        await api.post('/v1/users', {
+          email: this.state.email,
+          nickname: this.state.nickname,
+          password: this.state.password,
+        });
         this.setState({success: I18n.t('SucessSignUp')});
         setTimeout(() => {
           Actions.Login();
         }, delay);
-      } catch (_err) {
-        console.log(_err.toString());
-        this.setState({
-          error: _err.toString(),
-        });
+      } catch (error) {
+        const {response} = error;
+        const {status} = response ? response : {};
+        if (status === 409) {
+          this.setState({
+            error: I18n.t('usedEmail'),
+          });
+        } else {
+          this.setState({
+            error: I18n.t('genericError'),
+          });
+        }
       }
     }
   };
@@ -140,11 +152,10 @@ export default class Login extends Component {
         <Animated.View style={[Styles.containerForm]}>
           <TextInput
             style={Styles.inputSignUp}
-            placeholder="NickName"
+            placeholder={I18n.t('nickname')}
             autoCorrect={false}
-            value={this.state.nickName}
+            value={this.state.nickname}
             onChangeText={this.handleNicknameChange}
-            secureTextEntry
             onFocus={() => this.setState({error: ''})}
           />
           <TextInput
