@@ -93,7 +93,10 @@ export default class Login extends Component {
 
   handleSignInPress = async () => {
     Keyboard.dismiss();
-    if (this.state.sername === 0 || this.state.password.length === 0) {
+    if (
+      this.state.email.trim().length === 0 ||
+      this.state.password.trim().length === 0
+    ) {
       this.setState({error: I18n.t('mandatoryFields')}, () => false);
     } else {
       try {
