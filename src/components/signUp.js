@@ -59,6 +59,7 @@ export default class Login extends Component {
   }
 
   handleEmailChange = email => {
+    email = email.replace(/\s/g, '');
     this.setState({error: ''});
     this.setState({email});
   };
@@ -69,6 +70,7 @@ export default class Login extends Component {
   };
 
   handlePasswordChange = password => {
+    password = password.replace(/\s/g, '');
     this.setState({error: ''});
     this.setState({password});
   };
