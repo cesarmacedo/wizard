@@ -59,6 +59,7 @@ export default class Login extends Component {
   }
 
   handleEmailChange = email => {
+    email = email.replace(/\s/g, '');
     this.setState({error: ''});
     this.setState({email});
   };
@@ -69,6 +70,7 @@ export default class Login extends Component {
   };
 
   handlePasswordChange = password => {
+    password = password.replace(/\s/g, '');
     this.setState({error: ''});
     this.setState({password});
   };
@@ -102,9 +104,9 @@ export default class Login extends Component {
   handleSignUpPress = async () => {
     Keyboard.dismiss();
     if (
-      this.state.nickname === 0 ||
-      this.state.password.length === 0 ||
-      this.state.email.length === 0
+      this.state.nickname.trim().length === 0 ||
+      this.state.password.trim().length === 0 ||
+      this.state.email.trim().length === 0
     ) {
       this.setState({error: I18n.t('mandatoryFields')}, () => false);
     } else {
