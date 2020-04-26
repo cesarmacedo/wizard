@@ -8,5 +8,9 @@
     "SucessSignUp": "Usuário cadastrado com sucesso!",
     "unauthorized": "E-mail ou senha incorretos!",
     "genericError": "Um erro ocorreu, tente novamente mais tarde!",
-    "usedEmail": "O e-mail já encontra-se em uso!"
+    "usedEmail": "O e-mail já encontra-se em uso!",
+    "deleteAccount": "Remover conta",
+    "close": "Fechar",
+    "profile": "Perfil",
+    "home": ""
 }
