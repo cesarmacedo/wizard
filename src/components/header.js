@@ -10,7 +10,8 @@ export default class Header extends Component {
   }
 
   goBack = () => {
-    const {destiny} = this.props;
+    const {props} = this;
+    const {destiny} = props;
     destiny();
   };
 

@@ -44,10 +44,12 @@ export default class Login extends Component {
         toValue: 0,
         speed: 4,
         bounciness: 30,
+        useNativeDriver: false,
       }),
       Animated.timing(this.state.opacity, {
         toValue: 1,
         duration: 500,
+        useNativeDriver: false,
       }),
     ]).start();
   }
@@ -70,10 +72,12 @@ export default class Login extends Component {
       Animated.timing(this.state.logo.x, {
         toValue: 150,
         duration: 200,
+        useNativeDriver: false,
       }),
       Animated.timing(this.state.logo.y, {
         toValue: 65,
         duration: 200,
+        useNativeDriver: false,
       }),
     ]).start();
   };
@@ -83,10 +87,12 @@ export default class Login extends Component {
       Animated.timing(this.state.logo.x, {
         toValue: 300,
         duration: 200,
+        useNativeDriver: false,
       }),
       Animated.timing(this.state.logo.y, {
         toValue: 120,
         duration: 200,
+        useNativeDriver: false,
       }),
     ]).start();
   };

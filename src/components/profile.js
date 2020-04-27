@@ -74,9 +74,7 @@ export default class Profile extends Component {
     };
 
     ImagePicker.showImagePicker(options, response => {
-      if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (!response.didCancel) {
+      if (!response.didCancel) {
         const {uri} = response;
         const source = {uri};
 
